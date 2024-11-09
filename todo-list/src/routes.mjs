@@ -27,6 +27,7 @@ router.get("/todo-lists/tasks/:listId", tasksController.index)
 // rota post /todo-lists/:listId/tasks
 router.post("/todo-lists/tasks/:listId", tasksController.create)
 // rota post/put /todo-lists/:listId/tasks/:taskId
-// rota delete /todo-lists/:listId
-
+router.post("/todo-lists/:listId/tasks/:taskId", tasksController.update)
+// rota delete /todo-lists/:listId/tasks/:taskId
+router.delete("/todo-lists/:listId/tasks/:taskId", tasksController.delete)
 // Formas de marcar como concluída e excluir uma tarefa (botão, checkbox, etc)

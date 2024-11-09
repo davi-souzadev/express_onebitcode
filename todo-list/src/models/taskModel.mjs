@@ -1,7 +1,7 @@
 import crypto from "crypto"
 import { todoModel } from "./todoModel.mjs"
 
-const tasks = []
+// const tasks = []
 // {
 //   id: crypto.randomUUID(),
 //   title: "Esta é uma tarefa",
@@ -61,17 +61,22 @@ export const taskModel = {
     todoModel.update(task.todoListId, task)
   },
 
-  update(taskId, task) {
-    const index = task.findIndex((t) => t.id === taskId)
+  update(taskId, listId, task) {
+    const tasks = todoModel.getById(listId)?.tasks
+    const index = tasks.findIndex((t) => t.id === taskId)
 
-    task[index] = {
-      ...task[index],
+    tasks[index] = {
+      ...tasks[index],
       ...task,
       updatedAt: new Date(),
     }
   },
 
-  delete(taskId) {
-    tasks = tasks.filter((task) => task.id !== taskId)
+  delete(taskId, listId) {
+    let list = todoModel.getById(listId)
+
+    if (!list) return
+
+    list.tasks = list.tasks.filter((task) => task.id !== taskId)
   },
 }

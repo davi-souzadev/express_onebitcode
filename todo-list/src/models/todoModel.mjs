@@ -37,7 +37,6 @@ export const todoModel = {
   },
 
   getById(id) {
-    console.log(id)
     return todosList.find((task) => task.id === id)
   },
 
@@ -61,7 +60,7 @@ export const todoModel = {
     const index = todosList.findIndex((t) => t.id === todoListId)
 
     console.log("------------todoModel -> UPDATE------------")
-    console.log(todoListId)
+    console.log(task)
     console.log("------------------------")
 
     const currentTasks = todosList[index]?.tasks
