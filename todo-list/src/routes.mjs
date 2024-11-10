@@ -20,7 +20,9 @@ router.get("/todo-lists/tasks/:listId", tasksController.index)
 
 // Criação de novas listas de tarefas (cada lista agrupa suas próprias tarefas)
 // rota post /todo-lists/create
+router.post("/todo-lists/create", todoListsController.create)
 // rota delete /todo-lists/:listId
+router.delete("/todo-lists/:listId", todoListsController.delete)
 // view get /todo-lists/create
 
 // Uma forma de adicionar, remover, deletar uma nova tarefa

@@ -15,12 +15,34 @@ export const todoListsController = {
     res.send(list)
   },
 
-  create: (req, res) => {},
+  create: (req, res) => {
+    try {
+      const { title } = req.body
+      const list = todoModel.create(title)
+      todoModel.save(list)
+
+      res.status(201).send({
+        success: "success",
+      })
+    } catch (error) {
+      res.status(500).send({
+        error: error.message,
+      })
+    }
+  },
 
   // DELETE /todo-lists/:listId
   delete: (req, res) => {
-    todoModel.delete(req.params.id)
+    try {
+      todoModel.delete(req.params.listId)
 
-    res.status(200).send([])
+      res.status(200).send({
+        success: "success",
+      })
+    } catch (error) {
+      res.status(500).send({
+        error: error.message,
+      })
+    }
   },
 }

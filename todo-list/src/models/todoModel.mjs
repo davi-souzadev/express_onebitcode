@@ -1,6 +1,6 @@
 import crypto from "crypto"
 
-const todosList = [
+let todosList = [
   {
     id: "1",
     title: "Esta é uma lista",
@@ -56,19 +56,22 @@ export const todoModel = {
     todosList.unshift(todoList)
   },
 
-  update(todoListId, task) {
+  update(todoListId, updates) {
     const index = todosList.findIndex((t) => t.id === todoListId)
 
-    console.log("------------todoModel -> UPDATE------------")
-    console.log(task)
-    console.log("------------------------")
+    if (index === -1) {
+      return
+    }
 
-    const currentTasks = todosList[index]?.tasks
-    currentTasks.unshift(task)
+    const currentList = todosList[index]
+
+    if (updates.tasks) {
+      currentList.tasks = [...currentList.tasks, ...updates.tasks]
+    }
 
     todosList[index] = {
       ...todosList[index],
-      tasks: currentTasks,
+      ...updates,
       updatedAt: new Date(),
     }
   },
