@@ -5,7 +5,7 @@ export const todoListsController = {
   index: (req, res) => {
     const lists = todoModel.getAll()
 
-    res.send(lists)
+    res.render("app", { lists })
   },
 
   // GET /todo-lists/:listId
@@ -21,9 +21,10 @@ export const todoListsController = {
       const list = todoModel.create(title)
       todoModel.save(list)
 
-      res.status(201).send({
-        success: "success",
-      })
+      res.redirect("/")
+      // res.status(201).send({
+      //   success: "success",
+      // })
     } catch (error) {
       res.status(500).send({
         error: error.message,
