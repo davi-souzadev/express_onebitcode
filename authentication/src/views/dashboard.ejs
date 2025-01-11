@@ -8,6 +8,9 @@
 
   <body>
     <h1>Welcome, <%= user.username %>!</h1>
+    <% if (user.role === "admin") { %>
+    <a href="/dashboard/users">Users</a>
+    <% } %>
     <a href="/auth/logout">Logout</a>
   </body>
 </html>

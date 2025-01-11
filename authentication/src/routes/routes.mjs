@@ -1,7 +1,10 @@
 import express from "express"
 import { auth } from "../controllers/auth-controller.mjs"
 import { dashboard } from "../controllers/dashboard-controller.mjs"
-import { authMiddleware } from "../middlewares/auth-middlewares.mjs"
+import {
+  authMiddleware,
+  ensureUserIsAdmin,
+} from "../middlewares/auth-middlewares.mjs"
 
 export const router = express.Router()
 
@@ -13,3 +16,10 @@ router.post("/auth/login", auth.login)
 router.get("/auth/logout", authMiddleware, auth.logout)
 
 router.get("/dashboard", authMiddleware, dashboard.dashboard)
+
+router.get(
+  "/dashboard/users",
+  authMiddleware,
+  ensureUserIsAdmin,
+  dashboard.users
+)

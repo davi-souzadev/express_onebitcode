@@ -5,3 +5,11 @@ export const authMiddleware = (req, res, next) => {
     res.redirect("/")
   }
 }
+
+export const ensureUserIsAdmin = (req, res, next) => {
+  if (req.session.currentUser.role !== "admin") {
+    res.redirect("/dashboard")
+  } else {
+    next()
+  }
+}
